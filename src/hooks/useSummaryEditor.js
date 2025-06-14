@@ -6,11 +6,11 @@ export function useSummaryEditor(initialText, onSave) {
 
   const startEdit = () => setIsEditing(true);
   const cancelEdit = () => {
-    setText(initialText); // Revert changes
+    setText(initialText);
     setIsEditing(false);
   };
   const saveEdit = () => {
-    onSave(text); // External save handler
+    onSave(text);
     setIsEditing(false);
   };
 

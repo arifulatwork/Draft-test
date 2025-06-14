@@ -16,3 +16,4 @@ export function useNestedTable(rowId, colId) {
 
   return { table, loading };
 }
+

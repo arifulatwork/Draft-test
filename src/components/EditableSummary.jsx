@@ -12,7 +12,7 @@ export default function EditableSummary({ initialSummary, onSave, tableId }) {
     saveEdit,
   } = useSummaryEditor(initialSummary, onSave);
 
-  const { canEdit } = usePermissions('admin', tableId, 't1'); // Example
+  const { canEdit } = usePermissions('admin', tableId, 't1'); // Lets Check dummy preparation
 
   return (
     <div>
