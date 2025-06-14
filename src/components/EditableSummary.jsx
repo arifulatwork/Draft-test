@@ -1,21 +1,31 @@
 import React from 'react';
-import { useEditMode } from '../hooks/useEditMode';
+import { useSummaryEditor } from '../hooks/useSummaryEditor';
+import { usePermissions } from '../hooks/usePermissions';
 
-export default function EditableSummary({ initialSummary, onSave }) {
-  const { isEditing, toggle } = useEditMode();
-  const [text, setText] = React.useState(initialSummary);
+export default function EditableSummary({ initialSummary, onSave, tableId }) {
+  const {
+    text,
+    setText,
+    isEditing,
+    startEdit,
+    cancelEdit,
+    saveEdit,
+  } = useSummaryEditor(initialSummary, onSave);
+
+  const { canEdit } = usePermissions('admin', tableId, 't1'); // Example
 
   return (
     <div>
       {isEditing ? (
         <>
           <input value={text} onChange={e => setText(e.target.value)} />
-          <button onClick={() => { onSave(text); toggle(); }}>Save</button>
+          <button onClick={saveEdit}>Save</button>
+          <button onClick={cancelEdit}>Cancel</button>
         </>
       ) : (
         <>
           <span>{text}</span>
-          <button onClick={toggle}>Edit</button>
+          {canEdit && <button onClick={startEdit}>Edit</button>}
         </>
       )}
     </div>
